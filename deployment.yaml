@@ -12,7 +12,7 @@ spec:
   type: LoadBalancer
 
 ---
-apiVersion: apps/v1
+apiVersion: ml6app/v1
 kind: Deployment
 metadata:
   name: ml6app
@@ -20,7 +20,7 @@ spec:
   selector:
     matchLabels:
       app: ml6app
-  replicas: 4
+  replicas: 2
   template:
     metadata:
       labels:
