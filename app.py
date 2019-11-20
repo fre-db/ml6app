@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request, render_template, Response
+from flask import Flask, jsonify, request, render_template
 
 from google.cloud import speech
 from google.cloud.speech import types
@@ -18,6 +18,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def process_wav():
+    # TODO: Proper error response
     file = request.files.get('file', None)
     if not file:
         return jsonify({"error": "No file"})
