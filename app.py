@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request, render_template, Response
 
 from google.cloud import speech
 from google.cloud.speech import types
+from google.protobuf.json_format import MessageToJson
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ML6 Application-0e9fc2df08a1.json"
 
@@ -24,7 +25,7 @@ def process_wav():
     config = types.RecognitionConfig(language_code='en-US', audio_channel_count=2)
     try:
         response = client.recognize(config, types.RecognitionAudio(content=file.read()))
-        return Response(str(response.results))
+        return jsonify(MessageToJson(response))
     except Exception as e:
         return jsonify({"error": str(e)})
 
