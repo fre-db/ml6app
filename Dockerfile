@@ -8,5 +8,5 @@ RUN pip install -r /ml6app/requirements.txt
 
 
 
-EXPOSE 5000
+ENV PORT 8080
 CMD ["python", "/ml6app/app.py"]
