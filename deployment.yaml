@@ -3,11 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ml6app
+  labels:
+    name: ml6app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: ml6app
-  replicas: 1
   template:
     metadata:
       labels:
@@ -15,7 +17,6 @@ spec:
     spec:
       containers:
       - name: ml6app
-        image: ml6app:latest
-        imagePullPolicy: Never
+        image: gcr.io/ml6-application/flask-app:v1
         ports:
         - containerPort: 8080
