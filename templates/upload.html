@@ -1,16 +1,36 @@
 <html>
-   <head>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script type = "text/javascript" src = "{{ url_for('static', filename = 'webapp.js') }}" ></script>
-   </head>
-   <body>
-      <h1>WAV Speech-to-text</h1>
-      <form id="form-api"  method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit" />
-      </form>
-      <div class="results">
+<head>
+    <link rel="stylesheet" id="ml6eu-style-css" href="https://ml6.eu/wp-content/themes/ml6eu/style.css?ver=5.2.4"
+          type="text/css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'webapp.js') }}"></script>
+    <link rel="stylesheet" id="ml6app-style-css" href="{{ url_for('static', filename = 'overrides.css') }}"
+          type="text/css" media="all">
+</head>
+<body class="home blog wp-custom-logo hfeed ml6eu elementor-default">
+<div class="site" id="page">
+    <header id="masthead" class="site-header">
+        <div class="site-branding">
+            <a href="{{ linkedin }}">
+                <img class="person-img" alt="Frédérique" src="{{ url_for('static', filename = 'avatar.jpeg') }}">
+            </a>
+        </div>
+        <div class="site-header-text">
+            <h1><a href="{{ linkedin }}">Frédérique</a>'s ML6 Application Demo</h1>
+            <a href="mailto:fred.debaerdemaeker@gmail.com">fred.debaerdemaeker@gmail.com</a>
+        </div>
+    </header>
+    <div class="full-width">
+        <h2>WAV Speech-to-text</h2>
+        <form id="form-api" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file"/>
+            <input type="submit"/>
+        </form>
+    </div>
+    <div class="results">
 
-      </div>
-   </body>
+    </div>
+</div>
+
+</body>
 </html>

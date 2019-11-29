@@ -8,6 +8,15 @@ from google.protobuf.json_format import MessageToJson
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ML6 Application-0e9fc2df08a1.json"
 
 app = Flask(__name__)
+
+
+@app.context_processor
+def vars():
+    return {
+        'linkedin': 'https://www.linkedin.com/in/fr%C3%A9d%C3%A9rique-de-baerdemaeker-6a265610b/'
+    }
+
+
 client = speech.SpeechClient()
 
 
