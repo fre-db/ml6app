@@ -18,15 +18,20 @@
             </a>
         </div>
         <div class="site-header-text">
-            <h1><a href="{{ linkedin }}">Frédérique</a>'s ML6 Application Demo</h1>
-            <a href="mailto:fred.debaerdemaeker@gmail.com">fred.debaerdemaeker@gmail.com</a>
+            <h1>
+                <a href="{{ linkedin }}">Frédérique</a>'s ML6 Demo
+            </h1>
+            <form action="/api">
+                <input type="submit" value="API"/>
+            </form>
+            {% include "includes/mailto.html" %}
         </div>
     </header>
     <div clas="app">
         <h2>WAV Speech-to-text</h2>
         <form id="form-api" method="POST" enctype="multipart/form-data">
             <input id="input" type="file" name="files" accept="audio/wav" multiple/>
-            {% include "language-picker.html" %}
+            {% include "includes/language-picker.html" %}
             <input type="submit"/>
         </form>
     </div>

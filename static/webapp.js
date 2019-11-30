@@ -5,7 +5,7 @@ $(document).ready(function () {
   fileInput = $('input[name="files"]');
   langInput = $('input[name="language"]');
 
-  $('form').submit(function (e) {
+  $('#form-api').submit(function (e) {
     e.preventDefault();
     if (!fileInput.val()) return;
 
