@@ -25,7 +25,7 @@
     <div clas="app">
         <h2>WAV Speech-to-text</h2>
         <form id="form-api" method="POST" enctype="multipart/form-data">
-            <input id="input" type="file" name="file" accept="audio/wav"/>
+            <input id="input" type="file" name="files" accept="audio/wav" multiple/>
             {% include "language-picker.html" %}
             <input type="submit"/>
         </form>

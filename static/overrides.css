@@ -30,24 +30,29 @@ h1 {
 .result > h2 {
     margin-bottom: 1em;
 }
+
 .result > p {
     min-height: 1em;
 }
-.results .result+.result {
+
+.results .result + .result {
     padding-top: .75em;
     margin-top: .75em;
     border-top: 1px solid #c9d7df;
 }
 
+input {
+    display: inline-block !important;
+    width: auto !important;
+}
+
 input[type="text"] {
     box-shadow: none !important;
-    display: inline-block;
-    margin: 0 2em;
-    width: auto;
+    margin-right: 2em;
 }
 
 #filename {
-     color:  #f90;
+    color: #f90;
 }
 
 .error {
