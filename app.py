@@ -47,7 +47,8 @@ def process_wav():
     if debug:
         return jsonify(debug_resp)
 
-    config = types.RecognitionConfig(language_code='en-US', audio_channel_count=2)
+    lang = request.form.get('language', 'en-US')
+    config = types.RecognitionConfig(language_code=lang, audio_channel_count=2)
     try:
         response = client.recognize(config, types.RecognitionAudio(content=file.read()))
         return jsonify(MessageToJson(response))

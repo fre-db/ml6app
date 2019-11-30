@@ -39,6 +39,13 @@ h1 {
     border-top: 1px solid #c9d7df;
 }
 
+input[type="text"] {
+    box-shadow: none !important;
+    display: inline-block;
+    margin: 0 2em;
+    width: auto;
+}
+
 #filename {
      color:  #f90;
 }
@@ -117,4 +124,9 @@ h1 {
 
 ul {
     list-style: none !important;
+}
+
+progress {
+    margin-left: 2em;
+    vertical-align: middle;
 }

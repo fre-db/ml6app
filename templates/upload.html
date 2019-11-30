@@ -26,6 +26,7 @@
         <h2>WAV Speech-to-text</h2>
         <form id="form-api" method="POST" enctype="multipart/form-data">
             <input id="input" type="file" name="file" accept="audio/wav"/>
+            {% include "language-picker.html" %}
             <input type="submit"/>
         </form>
     </div>
@@ -38,8 +39,16 @@
                 <div></div>
                 <div></div>
             </div>
-            <div id="response">
-                <h3>Check out the JSON Response: </h3>
+            <div class="success" style="display: none;">
+                <h3>Confidence
+                    <progress max="1"></progress>
+                </h3>
+                <h3>
+                    Language: <span id="result-lang"></span>
+                </h3>
+                <div id="response">
+                    <h3>Check out the JSON Response: </h3>
+                </div>
             </div>
         </div>
     </div>
