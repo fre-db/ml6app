@@ -28,6 +28,9 @@ h1 {
 }
 
 .result > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 1em;
 }
 
@@ -135,4 +138,8 @@ ul {
 progress {
     margin-left: 2em;
     vertical-align: middle;
+}
+
+.success, .results {
+    display: none;
 }

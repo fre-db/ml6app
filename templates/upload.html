@@ -7,7 +7,8 @@
     <link rel="stylesheet" id="ml6app-style-css" href="/static/overrides.css" type="text/css" media="all">
     <link href="/static/jsonTree/jsonTree.css" rel="stylesheet"/>
     <script src="/static/jsonTree/jsonTree.js"></script>
-
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body class="home blog wp-custom-logo hfeed ml6eu elementor-default">
 <div class="site" id="page">
@@ -35,16 +36,23 @@
             <input type="submit"/>
         </form>
     </div>
-    <div class="results" style="display: none;">
+    <div class="results">
         <div id="template" class="result" style="display: none">
-            <h2>Transcription for <span id="filename"></span></h2>
+            <h2>
+                <span id="filename"></span>
+                <div class="success">
+                    <button name="play"><i class="fa fa-play" aria-hidden="true"></i></button>
+                    <button name="mute"><i class="fa fa-volume-off" aria-hidden="true"></i></button>
+                </div>
+            </h2>
+            <audio></audio>
             <div class="loader">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-            <div class="success" style="display: none;">
+            <div class="success">
                 <h3>Confidence
                     <progress max="1"></progress>
                 </h3>
