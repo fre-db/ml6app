@@ -1,4 +1,6 @@
 import os
+import sndhdr
+
 from flask import Flask, jsonify, request, render_template, Blueprint
 from flask_restplus import Api, reqparse, Resource, abort
 
@@ -64,6 +66,10 @@ class Upload(Resource):
 
         if not file:
             abort(400, 'No file provided')
+
+        if sndhdr.test_wav(file.read(512), file) is None:
+            abort(400, 'File is not .wav')
+        file.seek(0)
 
         if debug:
             return jsonify(self.debug_resp)
