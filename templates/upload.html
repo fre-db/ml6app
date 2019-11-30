@@ -3,9 +3,11 @@
     <link rel="stylesheet" id="ml6eu-style-css" href="https://ml6.eu/wp-content/themes/ml6eu/style.css?ver=5.2.4"
           type="text/css" media="all">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'webapp.js') }}"></script>
-    <link rel="stylesheet" id="ml6app-style-css" href="{{ url_for('static', filename = 'overrides.css') }}"
-          type="text/css" media="all">
+    <script type="text/javascript" src="/static/webapp.js"></script>
+    <link rel="stylesheet" id="ml6app-style-css" href="/static/overrides.css" type="text/css" media="all">
+    <link href="/static/jsonTree/jsonTree.css" rel="stylesheet"/>
+    <script src="/static/jsonTree/jsonTree.js"></script>
+
 </head>
 <body class="home blog wp-custom-logo hfeed ml6eu elementor-default">
 <div class="site" id="page">
@@ -20,15 +22,26 @@
             <a href="mailto:fred.debaerdemaeker@gmail.com">fred.debaerdemaeker@gmail.com</a>
         </div>
     </header>
-    <div class="full-width">
+    <div clas="app">
         <h2>WAV Speech-to-text</h2>
         <form id="form-api" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file"/>
+            <input id="input" type="file" name="file" accept="audio/wav"/>
             <input type="submit"/>
         </form>
     </div>
-    <div class="results">
-
+    <div class="results" style="display: none;">
+        <div id="template" class="result" style="display: none">
+            <h2>Transcription for <span id="filename"></span></h2>
+            <div class="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="response">
+                <h3>Check out the JSON Response: </h3>
+            </div>
+        </div>
     </div>
 </div>
 
