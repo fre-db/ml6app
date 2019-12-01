@@ -8,4 +8,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends libsndfile1
 RUN pip install -r /ml6app/requirements.txt
 
 ENV PORT 8080
-CMD ["python", "/ml6app/app.py"]
+CMD ["gunicorn", "app:app", "--workers 2", "--threads 2", "-k gthread"]

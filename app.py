@@ -95,5 +95,6 @@ if __name__ == "__main__":
 
 
 @api.errorhandler(Exception)
+@app.errorhandler(Exception)
 def handle_invalid_usage(error):
     return {'message': str(error)}, getattr(error, 'code', 500)
