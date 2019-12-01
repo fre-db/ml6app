@@ -23,6 +23,7 @@ function transcribe_file(form, file) {
   new_result.removeAttr('id');
   new_result.find("#filename").text(file.name);
   new_result.find("#result-lang").text(lang_label);
+  new_result.find("audio")[0].src = URL.createObjectURL(file);
 
   result_div.prepend(new_result);
   new_result.show();
@@ -46,25 +47,25 @@ function transcribe_file(form, file) {
 
 function load_result(response, new_result) {
   const response_obj = JSON.parse(response);
-  const audio = new_result.find("audio")[0];
-  audio.src = URL.createObjectURL(file);
 
   let recognized_text = "";
   let confidence = 0;
-  response_obj.results.forEach(function (result) {
+  const results = response_obj.results ? response_obj.results : [];
+  results.forEach(function (result) {
     recognized_text += result.alternatives[0].transcript;
     confidence += result.alternatives[0].confidence;
   });
   new_result.find(".loader").replaceWith('<p>' + recognized_text + '</p>');
-  new_result.find("progress").val(confidence / response_obj.results.length);
+  new_result.find("progress").val(confidence / Math.max(results.length, 1));
   jsonTree.create(response_obj, new_result.find('#response')[0]);
 
-  initButtons(new_result, audio);
+  initButtons(new_result);
 
   new_result.find(".success").show();
 }
 
-function initButtons(result, audio) {
+function initButtons(result) {
+  const audio = result.find("audio")[0];
   const play_btn = result.find("button[name='play']");
   const mute_btn = result.find("button[name='mute']");
 

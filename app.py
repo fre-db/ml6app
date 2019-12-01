@@ -1,11 +1,11 @@
 import os
-import sndhdr
+import soundfile as sf
 
 from flask import Flask, jsonify, request, render_template, Blueprint
 from flask_restplus import Api, reqparse, Resource, abort
 
-from google.cloud import speech
-from google.cloud.speech import types
+from google.cloud import speech_v1p1beta1
+from google.cloud.speech_v1p1beta1 import types
 from google.protobuf.json_format import MessageToJson
 from werkzeug.datastructures import FileStorage
 
@@ -15,6 +15,9 @@ app = Flask(__name__, static_url_path='/static')
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api = Api(blueprint, default='api')
 app.register_blueprint(blueprint)
+app.config['MAX_CONTENT_LENGTH'] = 64 * 1024 * 1024  # max of 64 MB
+MAX_DURATION = 120  # max duration of wav in seconds
+DEBUG = False
 
 
 @app.context_processor
@@ -24,8 +27,7 @@ def vars():
     }
 
 
-client = speech.SpeechClient()
-debug = False
+client = speech_v1p1beta1.SpeechClient()
 
 
 @app.route('/')
@@ -55,7 +57,19 @@ class Upload(Resource):
     """
 
     def transcribe_file(self, file, lang):
-        config = types.RecognitionConfig(language_code=lang, audio_channel_count=2)
+        wav = sf.SoundFile(file)
+        if 'WAV' not in wav.format:
+            abort(400, 'File was recognized as %s, not WAV' % wav.format)
+        if wav.subtype != 'PCM_16':
+            abort(400, 'Google only accepts 16 bit PCM encoding. File is %s' % wav.subtype_info)
+        if wav.frames / wav.samplerate > MAX_DURATION:
+            abort(400, 'Demo file duration is limited to %s seconds' % MAX_DURATION)
+
+        file.seek(0)
+        config = types.RecognitionConfig(
+            language_code=lang,
+            audio_channel_count=wav.channels
+        )
         audio = types.RecognitionAudio(content=file.read())
         response = client.recognize(config, audio)
         return jsonify(MessageToJson(response))
@@ -67,11 +81,7 @@ class Upload(Resource):
         if not file:
             abort(400, 'No file provided')
 
-        if sndhdr.test_wav(file.read(512), file) is None:
-            abort(400, 'File is not .wav')
-        file.seek(0)
-
-        if debug:
+        if DEBUG:
             return jsonify(self.debug_resp)
 
         lang = request.form.get('language', 'en-US')
