@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: ml6app
-        image: gcr.io/ml6-application/flask-app:v2
+        image: gcr.io/ml6-application/flask-app:v1
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
