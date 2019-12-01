@@ -16,6 +16,7 @@ blueprint = Blueprint('api', __name__, url_prefix='/api')
 api = Api(blueprint, default='api')
 app.register_blueprint(blueprint)
 app.config['MAX_CONTENT_LENGTH'] = 64 * 1024 * 1024  # max of 64 MB
+app.config['PROPAGATE_EXCEPTIONS'] = True
 MAX_DURATION = 120  # max duration of wav in seconds
 DEBUG = False
 
@@ -90,7 +91,7 @@ class Upload(Resource):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, threaded=True)
+    app.run(host="0.0.0.0", port=8080)
 
 
 @api.errorhandler(Exception)
